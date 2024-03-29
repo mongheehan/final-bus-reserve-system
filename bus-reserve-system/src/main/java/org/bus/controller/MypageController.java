@@ -13,6 +13,6 @@ public class MypageController {
 
 	@GetMapping("/mypage_info")
 	public void myPageDo() {
-		log.info("myPage");
+		log.info("myPage"); //메인브랜치 푸쉬 방지
 	}
 }
