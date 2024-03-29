@@ -1,0 +1,194 @@
+@charset "UTF-8";
+/*==공통css==*/
+*{
+	margin:0px;
+	padding:0px;
+}
+#main_wrap{
+	margin-top:-16px;
+}
+/*header*/
+#header {
+	width: 100%;
+	height: 80px;
+	background: rgb(30, 130, 255);
+}
+#info_nav {
+	position: absolute;
+	right: 20px;
+}
+#logo {
+	float: left;
+	height: 50px;
+}
+#info_nav>ul>li {
+	float: left;
+	margin-left: 10px;
+	font-weight: bold;
+	color: #ffffff;
+}
+#menu_nav>ul>li {
+	float: left;
+	margin-top: 15px;
+	margin-left: 15px;
+	font-size: 20px;
+	font-weight: bold;
+	color: #ffffff;
+	font-weight: bold;
+}
+/*footer*/
+#footer {
+	clear:both;
+	border-top: 2px solid gray;
+}
+/*태그전체*/
+ul {
+	list-style-type: none;
+}
+h5 {
+	font-weight: bold;
+	margin-bottom: 20px;
+	color: #ffffff;
+}
+a{
+	text-decoration: none;
+	color: inherit; 
+}
+/*각페이지 제목 부분*/
+#page_title{
+	width: 100%;
+	height: 35px;
+	padding-left:150px;
+	background: #1E82FF;
+}
+#page_title > h5{
+	font-size:16px;
+}
+
+
+/*==승차권예매페이지(main)==*/
+/*레이아웃*/
+#reserve_content1{
+	background:rgb(30, 130, 255);
+	padding-bottom:40px;
+}
+#reserve_search {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 80%;
+	clear: both;
+}
+.btn_get_dispatches{
+	float:right;
+	margin-right:200px;
+}
+#myTabContent{
+	padding:20px;
+}
+#tab-content{
+	height:200px;
+}
+#myTabContent tr,#myTabContent td{
+	padding-bottom:20px;
+	padding-left:20px;
+}
+
+/*승차권 조회*/
+.tab-content {
+	background-color: #ffffff;
+	height: 150px;
+}
+.nav-link {
+	background: #1E82FF;
+	color: #ffffff;
+	font-weight: bold;
+}
+.nav-link.active {
+	color: #000000;
+	font-weight: bold;
+}
+/*좌석*/
+.seat-table {
+    border-collapse: collapse;
+    width: 40%;
+    margin-left: 15px; 
+}
+
+.seat-table th, .seat-table td {
+    border: 1px solid black;
+    text-align: center;
+    width:20% /* td 폭 균등하게 분배 */
+}
+/* 3번째 열의 테두리를 없애는 스타일 마지막 라인은 남김.*/
+.hidden {
+    display: none;
+}
+.choiced{
+	background-color: #99ffff;
+}
+#header_bottom_search {
+   clear: both;
+}
+.seat-table tr:not(:last-child) td:nth-child(3) { 
+	border-bottom: none;
+	border-top: none;
+}
+.seat-table td img, .seat-table th img{
+	width: 70%;
+	height: auto;
+}
+.seat-table th:nth-child(2){
+	border-bottom : none;
+	border-right : none;
+}
+.seat-table th:nth-child(3){
+	border-left : none;
+}
+.seat-container {
+    position: relative; /* 포지션을 상대적으로 지정하여 내부 요소의 위치를 조정 */
+    width: 100%; /* 부모 요소에 꽉 차게 설정 */
+}
+.seat-container span {
+    position: absolute; /* 포지션을 절대적으로 지정하여 이미지 위에 위치시킴 */
+    top: 50%; /* 상단 위치를 중앙으로 이동 */
+    left: 50%; /* 좌측 위치를 중앙으로 이동 */
+    transform: translate(-50%, -50%); /* 중앙 정렬을 위해 이동 */
+    font-size: 14px; /* 숫자의 크기 설정 */
+    color: black; /* 숫자의 색상 설정 */
+}
+
+
+/*==매니저페이지(manager)==*/
+/*레이아웃*/
+#manager_route_content1{
+	width:20%;
+	padding:20px;
+	background:red;
+	float:left;
+}
+#manager_route_content2{
+	width:80%;
+	padding:20px;
+	float:left;
+}
+.select_title{
+	width: 80px;
+	height: 38px;
+	line-height: 38px;
+}
+.route_select{
+	clear:both;
+	width:600px;
+	padding-left:10px;
+}
+.route_select > select, p{
+	float:left;
+}
+.form-select{
+	width:170px;
+	margin-left: 10px;
+}
+#dateTimeInput{
+	width:230px;
+}

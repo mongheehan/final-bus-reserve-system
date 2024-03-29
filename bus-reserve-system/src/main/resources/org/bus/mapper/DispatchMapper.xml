@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="org.bus.mapper.DispatchMapper">
+	
+	<select id="getDispatchList" resultType="org.bus.domain.DispatchVO">
+		<![CDATA[
+			select d.dispatch_no AS dispatchNo, d.bus_no AS busNo, d.departure_time AS departureTime,
+        	s.terminal_name AS startPointName, e.terminal_name AS endPointName
+            from dispatch_info d
+            JOIN terminal s ON d.start_point = s.terminal_no
+            JOIN terminal e ON d.end_point = e.terminal_no
+            where dispatch_no > 0 ORDER BY dispatch_no ASC
+		]]>
+	</select>
+	
+	<insert id="insertDispatch">
+		INSERT INTO dispatch_info (dispatch_no, bus_no, start_point, end_point, departure_time)
+    		VALUES(SEQ_dispatch_info.NEXTVAL, #{busNo}, 
+           (SELECT terminal_no FROM terminal WHERE terminal_name = #{startPointName}), 
+           (SELECT terminal_no FROM terminal WHERE terminal_name = #{endPointName}), 
+           TO_DATE(#{departureTime}, 'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
+	
+	<select id="getBusList" resultType="org.bus.domain.BusVO">
+			select bus_no AS busNo from bus
+	</select>
+	
+	<select id="getTerminalListManager" resultType="org.bus.domain.TerminalVO">
+			select terminal_no AS terminalNo, terminal_name AS terminalName, region from terminal
+	</select>
+	
+	<select id="getTerminalNo" resultType="org.bus.domain.TerminalVO">
+		select terminal_no from terminal where terminal_name = '서울1터미널'
+	</select>
+	
+	<update id="updateDispatch">
+		UPDATE dispatch_info SET bus_no = #{busNo}, departure_time = TO_DATE(#{departureTime}, 'YYYY-MM-DD HH24:MI:SS')
+		WHERE dispatch_no = #{dispatchNo}
+	</update>
+	
+	<delete id="deleteDispatch">
+		DELETE FROM dispatch_info WHERE dispatch_no = #{dispatchNo}
+	</delete>
+	
+	<select id="getRegionList" resultType="string">
+		SELECT REGION FROM terminal GROUP BY region
+	</select>
+
+</mapper>

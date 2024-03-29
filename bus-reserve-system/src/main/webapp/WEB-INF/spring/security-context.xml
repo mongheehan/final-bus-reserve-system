@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<bean id="passwordEncoder" class="org.bus.security.PlainTextPasswordEncoder"/>
+	<bean id="customUserDetailService" class="org.bus.security.CustomUserDetailService"/>
+	
+	<security:http>
+		<security:csrf disabled="true"/>
+	
+		<!-- URL 패턴에 따른 권한 설정 -->
+		<security:intercept-url pattern="/**" access="permitAll"/>
+		<security:intercept-url pattern="/mypage/**" access="hasRole('ROLE_member')"/>
+		<security:intercept-url pattern="/manager/**" access="hasRole('ROLE_admin')"/>
+		
+		<!-- 로그인 페이지 지정 -->
+		<security:form-login username-parameter="loginId" password-parameter="loginPassword" 
+			login-processing-url="/login" login-page="/member/login" default-target-url="/reserve/reserve_main"/>
+	
+		<!-- 로그아웃 설정(로그아웃시 메인 페이지로 이동) -->
+		<security:logout logout-url="/logout" logout-success-url="/reserve/reserve_main" invalidate-session="true"/>
+		
+	</security:http>
+	
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="customUserDetailService"> 
+		</security:authentication-provider>
+	</security:authentication-manager>
+    
+</beans>

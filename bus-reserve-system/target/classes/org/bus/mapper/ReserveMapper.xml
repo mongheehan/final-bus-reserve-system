@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bus.mapper.ReserveMapper">
+	
+	<resultMap id="candidateResultMap" type="org.bus.domain.SearchedDispatch">
+		<result property="startRegion" column="start_region"/>
+		<result property="endRegion" column="end_region"/>
+		<result property="startTerminal" column="start_terminal"/>
+		<result property="endTerminal" column="end_terminal"/>
+	</resultMap>
+	
+	<resultMap id="dispatchResultMap" type="org.bus.domain.SearchedDispatch">
+		<id property="dispatchNo" column="dispatch_no" />
+		<result property="busNo" column="bus_no" />
+		<result property="busType" column="bus_type"/>
+		<result property="totalSeat" column="total_seat"/>
+		<result property="startPoint" column="start_point" />
+		<result property="endPoint" column="end_point" />
+		<result property="departureTime" column="departure_time" />
+		<result property="startRegion" column="start_region"/>
+		<result property="endRegion" column="end_region"/>
+		<result property="startTerminal" column="start_terminal"/>
+		<result property="endTerminal" column="end_terminal"/>
+	</resultMap>
+	
+	<select id="getDispatchList" resultMap="dispatchResultMap">
+		SELECT di.dispatch_no, di.bus_no, b.bus_type, b.total_seat ,di.start_point, di.end_point, di.departure_time, t.region start_region, t2.region end_region, t.terminal_name start_terminal, t2.terminal_name end_terminal
+		FROM ((dispatch_info di JOIN terminal t on di.start_point = t.terminal_no) JOIN terminal t2 on di.end_point = t2.terminal_no) JOIN bus b on di.bus_no = b.bus_no
+		WHERE t.terminal_name =#{startTerminal} AND t2.terminal_name = #{endTerminal}  AND to_char(departure_time, 'YYYY-MM-DD') = #{departureTime}
+	</select>
+
+	<resultMap type="org.bus.domain.TerminalVO" id="terminalResultMap">
+		<id property="terminalNo" column="terminal_no"/>
+		<result property="terminalName" column="terminal_name"/>
+		<result property="region" column = "region"/>
+	</resultMap>
+	
+	<select id ="getTerminalList" resultMap = "terminalResultMap">
+		SELECT * FROM terminal
+	</select>
+		
+	<select id="getEndCandidate" resultMap = "candidateResultMap" parameterType="java.lang.String">
+		SELECT distinct t.region start_region, t2.region end_region, t.terminal_name start_terminal, t2.terminal_name end_terminal
+		FROM (dispatch_info di JOIN terminal t on di.start_point = t.terminal_no) JOIN terminal t2 on di.end_point = t2.terminal_no
+		where t.terminal_name = #{terminalName}
+	</select>
+	
+	<resultMap type = "org.bus.domain.TicketVO" id = "ticketResultMap">
+		<id property="ticketNo" column="ticket_no"/>
+		<result property = "payNo" column="pay_no"/>
+		<result property = "dispatchNo" column="dispatch_no"/>
+		<result property = "id" column="id"/>
+		<result property = "seatNo" column="seat_no"/>
+		<result property = "ticketStatus" column="ticket_status"/>
+	</resultMap>
+	
+	<select id ="getTickets" resultMap ="ticketResultMap" parameterType="java.lang.Integer">
+		select * from ticket where dispatch_no = #{dispatchNo}
+	</select>
+	
+	<insert id="insertPay">
+		INSERT into pay (
+			pay_no, id, amount, payment_date, pay_status, card_no, birth, phone_no
+		)
+			values (
+				SEQ_PAY.nextval, 'aa', #{amount}, sysdate,'승인', #{cardNo}, #{birth}, #{phoneNo}
+			)
+	</insert>
+</mapper>
