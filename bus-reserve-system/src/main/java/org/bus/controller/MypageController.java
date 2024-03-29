@@ -13,6 +13,6 @@ public class MypageController {
 
 	@GetMapping("/mypage_info")
 	public void myPageDo() {
-		log.info("myPage");//test//브랜치 테스트1234
+		log.info("myPage");
 	}
 }
