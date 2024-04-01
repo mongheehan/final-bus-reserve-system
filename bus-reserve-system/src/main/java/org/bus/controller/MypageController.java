@@ -12,7 +12,7 @@ import lombok.extern.log4j.Log4j;
 public class MypageController {
 
 	@GetMapping("/mypage_info")
-	public void myPageDo() {
+	public void myPageDo() { 
 		log.info("myPage"); 
 	}
 }

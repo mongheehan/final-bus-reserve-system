@@ -7,7 +7,7 @@
 <%@include file="../includes/header.jsp"%>
 
 <!-- 회원가입 form css 부트스트랩 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 <!-- 자바 스크립트 -->
@@ -78,6 +78,9 @@
 </script>
 	
 <!-- container -->
+<div id="join_content1">
+<!-- 큰제목 -->
+	<div class="content_title"><i class="fa-solid fa-address-book title_icon"></i>회원가입</div>
 	<!-- head 태그 내에 csrf meta tag를 추가 -->
 	<meta name="_csrf_header" th:content="${_csrf.headerName}">
 	<meta name="_csrf" th:content="${_csrf.token}">
@@ -115,7 +118,7 @@
 		</div>
 	</form>
 <!-- container 끝부분 -->
-
+</div>
 <!-- JS 부트스트랩 적용 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

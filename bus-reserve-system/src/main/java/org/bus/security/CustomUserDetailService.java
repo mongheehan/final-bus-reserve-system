@@ -26,7 +26,7 @@ public class CustomUserDetailService implements UserDetailsService{
 		if (vo == null) {
 			throw new UsernameNotFoundException("아이디가 확인 되지 않습니다." + username);
         }
-		
+		System.out.println("확인: " + vo);
 		// 사용자의 권한을 설정한다.
         Collection<? extends GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + vo.getType()));
         return new CustomUser(vo, authorities);

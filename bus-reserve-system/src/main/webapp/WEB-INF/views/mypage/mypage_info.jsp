@@ -11,34 +11,36 @@
 
 	<!-- mypage_info1 시작 -->
 	<div id="mypage_info_content1">
-		<div id="mypage_info_content1">
 	<!-- 로그인한 사용자의 정보 조회 -->
-<%-- 	<p>principal: <sec:authentication property="principal"/></p>
-	<p>UserVo: <sec:authentication property="principal.user"/></p>   --%>
-    <h2 align="center">마이페이지</h2>
-   		<table>
+		<%-- <p>principal: <sec:authentication property="principal"/></p>
+			<p>UserVo: <sec:authentication property="principal.user"/></p>  --%>
+		<!-- 큰제목 -->
+		<div class="content_title"><i class="fa-solid fa-circle-user title_icon"></i>마이페이지</div>
+		<!-- 작은제목 -->
+		<div class="content_title2"><i class="fa-solid fa-circle-user title_icon"></i>회원정보</div>
+		<table class="table myInfo">
 			<tr>
-				<td>아이디: </td>
+				<th>아이디</th>
 				<td><sec:authentication property="principal.user.id"/></td>
 			</tr>
 			<tr>
-				<td>이름: </td>
+				<th>이름</th>
 				<td><sec:authentication property="principal.user.name"/></td>
 			</tr>
 			<tr>
-				<td>휴대폰: </td>
+				<th>휴대폰</th>
 				<td><sec:authentication property="principal.user.phoneNo"/></td>
 			</tr>
 			<tr>
-				<td>이메일: </td>
+				<th>이메일</th>
 				<td><sec:authentication property="principal.user.email"/></td>
 			</tr>			
 		</table>
-    </div>
-    
-    <div>
- 		<table></table>   	
-    </div>
+	</div>
+  
+	<div id="mypage_info_content2">
+		<div class="content_title2"><i class="fa-regular fa-credit-card title_icon"></i>자주쓰는 카드</div>
+		<table></table>   	
 	</div>
 	<!-- mypage_info1 끝 -->
 	

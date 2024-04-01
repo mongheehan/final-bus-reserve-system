@@ -5,17 +5,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- header -->
 <%@include file="../includes/header.jsp"%>
-<div id="page_title">
-	<h5>관리자 페이지 > 배차관리</h5>
-</div>
-<!-- manager_route1 시작 -->
-<div id="manager_route_content1">
-	사이드바
-</div>
-<!-- manager_route1 끝 -->
-
+<%@include file="../includes/side.jsp"%>
+s
 <!-- manager_route2 시작 -->
-<div id="manager_route_content2">
+<div id="manager_route_content1">
+	<!-- 큰제목 -->
+	<div class="content_title"><i class="fa-solid fa-bus-simple title_icon"></i>배차관리</div>
 	<table id="dispatch_list" class="table table-hover">
 		<thead>
 			<tr>
@@ -33,9 +28,20 @@
 					<td><c:out value="${dispatch.busNo}" /></td>
 					<td><c:out value="${dispatch.startPointName}" /></td>
 					<td><c:out value="${dispatch.endPointName}" /></td>
-					<td><c:out value="${dispatch.departureTime}" /></td>
+					<td class="departure-time"><c:out value="${dispatch.departureTime}" /></td>
 					<td><button type="button" class="btn removeBtn btn-secondary btn-sm">삭제</button></td>
 				</tr>
+				<script>
+				// JavaScript로 departureTime을 시간과 분으로 분리하여 화면에 표시
+			    	var departureTimes = document.querySelectorAll('.departure-time');
+			    	departureTimes.forEach(function(element) {
+			        var departureTime = element.textContent;
+			        var splitTime = departureTime.split(':');
+			        var hour = splitTime[0];
+			        var minute = splitTime[1];
+			        element.textContent = hour + ':' + minute;
+			    });
+        		</script>
 			</c:forEach>
 		</tbody>
 	</table>
@@ -57,7 +63,8 @@
 			</div>
 			<div class="modal-body">
 				<form>
-					<input type="text" id="dispatchNo" name="dispatchNo"/>
+				<!-- 수정시 필요한 배차번호 -->
+					<input type="hidden" id="dispatchNo" name="dispatchNo"/>
 					<div class="route_select">
 						<p class="select_title">버스번호</p>
 						<select id="busNumberSelect" class="form-select" name="busNumberSelect"
@@ -76,7 +83,8 @@
 							<c:forEach items="${region}" var="region">
 								<option value="${region}"><c:out value="${region}" /></option>
 							</c:forEach>
-						</select> <select id="departureTerminalSelect" class="form-select"
+						</select> 
+						<select id="departureTerminalSelect" class="form-select"
 							aria-label="Default select example"
 							name="departureTerminalSelect">
 							<option selected>터미널선택</option>

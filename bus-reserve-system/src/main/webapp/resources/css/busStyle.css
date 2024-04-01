@@ -1,0 +1,305 @@
+@charset "UTF-8";
+/*폰트*/
+body {
+	font-family: "IBM Plex Sans KR", sans-serif;
+	font-weight: bold;
+}
+/*header*/
+.navbar{
+	background-color:#68B3CE !important;
+}
+/*header 메뉴*/
+a.nav-link{
+	font-size:20px;
+	color:#ffffff;
+}
+/*a태그 기본스타일 없애기*/
+a {
+	text-decoration: none;
+	color: inherit;
+}
+/*메인css*/
+/*조회 부분 가운데 정렬*/
+#reserve_search{
+	width:70%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 75%;
+	clear: both !important;
+}
+/*메인페이지 조회부분 content*/
+#reserve_content1{
+	padding-top:70px;
+	padding-bottom:40px;
+	width:100%;
+	background-color: #68B3CE;
+}
+/*content 제목*/
+.content_title{
+	color:#ffffff;
+	font-size:20px;
+	margin:10px 0;
+}
+/* 아이콘*/
+i.title_icon{
+	padding:0 8px 0 0;
+}
+/*편도, 왕복 탭 부분*/
+button.nav-link{
+	font-size: 19px;
+	color:#ffffff;
+} 
+.nav-tabs{
+	border-bottom:1px solid #68B3CE;
+}
+/*편도, 왕복 탭 클릭시 하단 부분*/
+#myTabContent
+{
+	height:150px;
+	border-radius: 0 10px 10px 10px;
+	background-color:#ffffff;
+	font-size: 18px;
+} 
+/*출발지, 선택지 부분*/
+#myTabContent tr,#myTabContent td{
+	padding-top:20px;
+	padding-left:20px;
+}
+ .departureTerminal > input, .arrivalTerminal > input, .search_date > input{
+	width:200px;
+	float:left;
+}
+.departureTerminal > button, .arrivalTerminal > button, .search_date > button{
+	float:right;
+}
+.departureTerminal, .arrivalTerminal{
+	width: 270px;
+	margin-top:20px;
+}
+/*출발지, 도착지 modal 레이아웃*/
+.modal-xl {
+	--bs-modal-width:800px;
+}
+.modal-body{
+	margin:0 auto;
+	padding:30px;
+	font-size: 16px;
+}
+div[name="startLayer"] > strong, div[name="endLayer"] > strong{
+	font-size: 19px;
+}
+div[name="startLayer"] > strong > i, div[name="endLayer"] > strong > i{
+	padding-right:5px;
+}
+div[name="startLayer"]{
+	width:48%;
+	float:left;
+	margin-bottom:30px;
+	padding:10px;
+	background-color: #ECF1F5;
+}
+div[name="endLayer"]{
+	width:48%;
+	float:right;
+	margin-bottom:30px;
+	padding:10px;
+	background-color: #ECF1F5;
+}
+.modal-footer{
+	clear: both;
+}
+/*날짜*/
+.search_date{
+	width: 370px;
+}
+/*배차정보조회하기 버튼*/
+.btn_get_dispatches{
+	font-weight: bold;
+}
+/*배차조회 테이블*/
+#reserve_content2{
+	width:75%;
+	margin: 0 auto;
+}
+.dispatchTitle{
+	font-size: 20px;
+	margin:20px 0 15px 0;
+}
+.dispatchTitle > i{
+	padding-right:5px;
+}
+/*좌석*/
+.seat-table {
+    border-collapse: collapse;
+    width: 40%;
+    margin-left: 15px; 
+}
+
+.seat-table th, .seat-table td {
+    border: 1px solid black;
+    text-align: center;
+    width:20% /* td 폭 균등하게 분배 */
+}
+/* 3번째 열의 테두리를 없애는 스타일 마지막 라인은 남김.*/
+.hidden {
+    display: none;
+}
+.choiced{
+	background-color: #68B3CE;
+}
+#header_bottom_search {
+   clear: both;
+}
+.seat-table tr:not(:last-child) td:nth-child(3) { 
+	border-bottom: none;
+	border-top: none;
+}
+.seat-table td img, .seat-table th img{
+	width: 70%;
+	height: auto;
+}
+.seat-table th:nth-child(2){
+	border-bottom : none;
+	border-right : none;
+}
+.seat-table th:nth-child(3){
+	border-left : none;
+}
+.seat-container {
+    position: relative; /* 포지션을 상대적으로 지정하여 내부 요소의 위치를 조정 */
+    width: 100%; /* 부모 요소에 꽉 차게 설정 */
+}
+.seat-container span {
+    position: absolute; /* 포지션을 절대적으로 지정하여 이미지 위에 위치시킴 */
+    top: 50%; /* 상단 위치를 중앙으로 이동 */
+    left: 50%; /* 좌측 위치를 중앙으로 이동 */
+    transform: translate(-50%, -50%); /* 중앙 정렬을 위해 이동 */
+    font-size: 14px; /* 숫자의 크기 설정 */
+    color: black; /* 숫자의 색상 설정 */
+}
+
+/*로그인 페이지*/
+.login_content1{
+	padding-top:80px;
+}
+div.bg-white{
+	width:550px;
+}
+.justify-content-md-center{
+	margin: 0 auto;
+}
+.d-grid>.btn-secondary{
+	background-color: #68B3CE;
+	font-weight: bold;
+	border: 1px solid #68B3CE;
+}
+/*회원가입 페이지*/
+#join_content1{
+	padding-top:90px;
+	width:30%;
+	margin: 0 auto;
+}
+#join_content1 .content_title{
+	margin-top:10px;
+	color: #000000;
+	font-size:25px;
+}
+#join_content1 > form{
+	margin-top:20px;
+}
+#join_content1 .form-group{
+	margin-bottom:15px;
+}
+
+/*마이페이지*/
+#mypage_info_content1{
+	margin-top:90px;
+	margin-bottom:30px;
+}
+#mypage_info_content1>.content_title, #manager_info_content1>.content_title{
+	color: #000000;
+	font-size: 25px;
+	text-align: center;
+	margin-bottom:10px; 
+}
+.content_title2{
+	font-size:18px;
+	width:40%;
+	margin: 0 auto;
+	padding-bottom:10px;
+	text-align: left;
+	color:#474C52;
+}
+.myInfo{
+	width: 40%;
+	margin: 0 auto;
+}
+.myInfo tr,.myInfo td,.myInfo th{
+	border:1px solid #DEE2E6;
+}
+.myInfo th{
+	text-align:center;
+	background: #68B3CE;
+	color:#ffffff;
+}
+
+/*관리자페이지*/
+#manager_info_content1{
+	margin-top:90px;
+	width:80%;
+	float: left;
+}
+#manager_info_content1>.myInfo{
+	width:60%;
+}
+/*관리자페이지 사이드*/
+#side{
+	width:20%;
+	float:left;
+	margin-top:90px;
+	padding:20px 0 40px 20px;
+	border-right: 2px solid #68B3CE;
+}
+#side a{
+	color:#000000;
+	font-size: 19px;
+}
+/*관리자페이지 배차관리*/
+#manager_route_content1{
+	margin-top:70px;
+	width:80%;
+	padding:0 50px 50px 50px;
+	float: left;
+}
+#manager_route_content1>.content_title{
+	font-size:25px;
+	color:#000000;
+}
+/*배차등록 모달*/
+.modal-title{
+	font-weight: bold;
+}
+.modal-content{
+	width:520px;
+}
+#dispatchModal .select_title{
+	width: 80px;
+	height: 38px;
+	line-height: 38px;
+}
+#dispatchModal .route_select {
+	width:500px;
+	padding-left:10px;
+	clear: both;
+}
+#dispatchModal .route_select select, #dispatchModal .route_select p, #dispatchModal .route_select #dateTimeInput{
+	float:left;
+} 
+#dispatchModal .form-select{
+	width:170px;
+	margin-left: 10px;
+}
+#dateTimeInput{
+	width:230px;
+}

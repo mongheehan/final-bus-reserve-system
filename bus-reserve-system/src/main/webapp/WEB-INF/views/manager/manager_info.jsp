@@ -8,11 +8,32 @@
 
 <!-- header -->
 <%@include file="../includes/header.jsp"%>
-매니저 정보 조회 페이지
-
+<%@include file="../includes/side.jsp"%>
 	<!-- manager_info1 시작 -->
 	<div id="manager_info_content1">
-		manager_info_content 추가 부분
+		<!-- 로그인한 사용자의 정보 조회 -->
+		<%-- <p>principal: <sec:authentication property="principal"/></p>
+			<p>UserVo: <sec:authentication property="principal.user"/></p>  --%>
+		<!-- 큰제목 -->
+		<div class="content_title"><i class="fa-solid fa-circle-user title_icon"></i>관리자 정보</div>
+		<table class="table myInfo">
+			<tr>
+				<th>아이디</th>
+				<td><sec:authentication property="principal.user.id"/></td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td><sec:authentication property="principal.user.name"/></td>
+			</tr>
+			<tr>
+				<th>휴대폰</th>
+				<td><sec:authentication property="principal.user.phoneNo"/></td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td><sec:authentication property="principal.user.email"/></td>
+			</tr>			
+		</table>
 	</div>
 	<!-- manager_info1 끝 -->
 	

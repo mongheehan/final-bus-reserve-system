@@ -8,14 +8,10 @@
 
 <!-- header -->
 <%@include file="../includes/header.jsp"%>
-<!-- 승차권 예매 페이지 시작 -->
-<div id="page_title">
-	<h5>승차권 예매 > 예매정보</h5>
-</div>
 <!-- 승차권 조회 부분(#reserve_content1) -->
 	<div id="reserve_content1">
 		<div id="reserve_search">
-			<h5>승차권 예매</h5>
+			<div class="content_title"><i class="title_icon fa-solid fa-magnifying-glass"></i>승차권 예매 > 예매정보 조회</div>
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 				<li class="nav-item" role="presentation">
 					<button class="nav-link active" id="home-tab" data-bs-toggle="tab"
@@ -32,24 +28,26 @@
 			<!-- 편도탭 조회 목록 -->
 				<div class="tab-pane fade show active" id="home-tab-pane"
 					role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-					<table>
+					<table class="searchTable">
 						<tr>
-							<td colspan="2" class="departureTerminal">출발지: <input type="text"
-								class=txt id=start_point value="출발지를 선택해주세요.">
-								<button class="button1" id=choice_terminal>선택</button>
+							<td class="departureTerminal">
+								<input type="text" class="form-control" id="start_point" placeholder="출발지를 선택해주세요." aria-label="default input example">
+								<button class="btn btn-secondary" id="choice_terminal"><i class="fa-solid fa-magnifying-glass"></i></button>
 							</td>
+							<td></td>
 						</tr>
 						<tr>
-							<td class="arrivalTerminal">도착지: <input type="text"
-								class=txt id=end_point value="도착지를 선택해주세요.">
-								<button class="button1" id=choice_terminal2>선택</button>
+							<td class="arrivalTerminal">
+								<input type="text" class="form-control" id="end_point" placeholder="도착지를 선택해주세요." aria-label="default input example">
+								<button class="btn btn-secondary" id="choice_terminal2"><i class="fa-solid fa-magnifying-glass"></i></button>
 							</td>
-							<td>
-								<div class="search_date">날짜: <input type="text" id="datepicker"></div>
+							<td class="search_date">
+								<input type="text" id="datepicker" class="form-control" placeholder="날짜를 선택해주세요." aria-label="default input example">
+								<button class="btn_get_dispatches btn btn-secondary">배차정보조회하기</button>
 							</td>
 						</tr>
 					</table>
-					<button class="button1 btn_get_dispatches">배차정보조회하기</button>
+						
 				</div>
 				<!-- 왕복탭 조회 목록 -->
 				<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
@@ -61,9 +59,24 @@
 	
 	<!-- 조회 목록 선택 후 배자 목록(#reserve_content2) -->
 	<div id="reserve_content2">
-	<!-- 조회 조건에 대한 배차정보 -->
-		<table id = "dispatch">
-			
+		<div class="dispatchTitle"><i class="fa-solid fa-check"></i><b>배차정보</b></div>
+		* 조회 정보를 선택해 주세요.
+		<!-- 조회 조건에 대한 배차정보 -->
+		<table id = "dispatch" class="table table-hover">
+			<thead>
+			    <tr>
+			      <th scope="col">버스</th>
+			      <th scope="col">출발일시</th>
+			      <th scope="col">출발지</th>
+			      <th scope="col">도착지</th>
+			      <th scope="col">총좌석수</th>
+			      <th scope="col">좌석선택</th>
+			    </tr>
+			 </thead>
+			 <!-- 배차정보 들어가는 부분 -->
+			 <tbody id="dispatchTbody">
+			 
+			 </tbody>
 		</table>
 	</div>
 	<!-- #reserve_content2 끝 -->
@@ -73,13 +86,14 @@
 		<div class="modal-dialog  modal-xl">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">터미널 선택</h1>
+					<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>터미널 선택<strong></h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
+					* 출발지 터미널을 선택해주세요.<br>
 					<div name = "startLayer">
-						<strong>출발지 터미널</strong>
+						<strong><i class="fa-solid fa-check"></i>출발지 터미널</strong>
 						<table>
 							<c:forEach items ="${terminals}" var = "terminal">
 								<tr>
@@ -91,7 +105,7 @@
 						</table>
 					</div>
 					<div name = "endLayer">
-						<strong>도착지 터미널</strong>
+						<strong><i class="fa-solid fa-check"></i>도착지 터미널</strong>
 						<table id ="destinationTerminal">
 						</table>
 					</div>
@@ -162,7 +176,7 @@
 	            success: function(candidates) {
 	            	console.log("success바로 밑에 줄" + candidates);//test
 	                $('#destinationTerminal').empty();
-	                $('#destinationTerminal').append($('<b>').text('"'+terminalName+'"'+ '에 대한 도착 정보입니다... 원하시는 목적지를 선택해주세요.'));
+	                $('#destinationTerminal').append($('<b>').text('"'+terminalName+'"'+ '에 대한 도착 정보입니다...원하시는 목적지를 선택해주세요.'));
 	                $.each(candidates, function(index, candidate) {
 	                	console.log("each문 바로 밑에 줄" + candidates);//test
 	                    var newRow = $('<tr>').append(
@@ -236,19 +250,19 @@
 	            dataType: 'json',
 	            success: function(dispatches) {
 	               console.log("success: " + dispatches);//test
-	               $('#reserve_content2').empty();
-	               $('#reserve_content2').append('<b>입력하신 정보에 대한 배차조회 결과에요.</b>');
+	               $('#reserve_content2 #dispatchTbody').empty();
+	               $('#reserve_content2').append('<b>입력하신 정보에 대한 배차조회 결과입니다.</b>');
 	               $.each(dispatches, function(index, dispatch){
 	            	   alert("success안 each문 성공: " + dispatches);//test
 	            	   var newRow = $('<tr class = "dis-info-elem">');
-	            	   newRow.append('<td><b>' +'['+ dispatch.busType +']' +dispatch.busNo +'번  /// '+  '</b></td>');
-	                   newRow.append('<td>' +'<b>&nbsp&nbsp출발시간:</b>'+ dispatch.departureTime + '</td>');
-	                   newRow.append('<td>' + '<b>&nbsp&nbsp출발지:</b>' + '[' + dispatch.startRegion + ']'+dispatch.startTerminal + '</td>');
-	                   newRow.append('<td>' + '<b>&nbsp&nbsp도착지:</b>' + '[' + dispatch.endRegion +']' + dispatch.endTerminal + '</td>');
-	                   newRow.append('<td>' +'<b>&nbsp&nbsp총좌석수:</b>'+ dispatch.totalSeat + '</td>');
-	                   newRow.append('<td>&nbsp&nbsp<button type="button" id="get_seats">좌석선택</button></td>');
+	            	   newRow.append('<td><b>' +'['+ dispatch.busType +']' +dispatch.busNo +'번'+  '</b></td>');
+	                   newRow.append('<td>' + dispatch.departureTime + '</td>');
+	                   newRow.append('<td>' + '[' + dispatch.startRegion + ']'+dispatch.startTerminal + '</td>');
+	                   newRow.append('<td>' + '[' + dispatch.endRegion +']' + dispatch.endTerminal + '</td>');
+	                   newRow.append('<td>' + dispatch.totalSeat + '</td>');
+	                   newRow.append('<td><button type="button" id="get_seats" class="btn btn-secondary">좌석선택</button></td>');
 	                   newRow.append('<td class = "hidden">'+dispatch.dispatchNo + '</td></tr>');
-	            	   $('#reserve_content2').append(newRow);
+	            	   $('#reserve_content2 #dispatchTbody').append(newRow);
 	               }); //end $.each
 	            }//end success
 	        });//end $.ajax     
@@ -256,7 +270,7 @@
 		
 		$('#reserve_content2').on('click', '#get_seats', function(){
 			var superSeatTable = ''+
-		    '<table class="seat-table">' +
+		    '<tr><td colspan="7"><table class="seat-table">' +
 			    '<thead>' +
 				    '<tr>' +
 					    '<th colspan="2"><img src="/resources/img/driver.png" alt="운전석">운전석</th>' +
@@ -344,7 +358,7 @@
 				 		'<td><div class="seat-container"><img src="/resources/img/empty_seat.png" alt="좌석"><span>45</span></div></td>' +
 				    '</tr>' +
 			    '</tbody>' +
-		    '</table>';
+		    '</table></td></tr>';
 		    $('.seat-table').remove();
 			$(this).parent().parent().after(superSeatTable); 
 			
@@ -385,7 +399,7 @@
                  $(this).attr('src', '/resources/img/empty_seat.png');
              }
          });
-         
+         //여기가 안먹는 것 같음
          $('#reserve_content2').on('click', '.seat-container img', function() {  //클릭했을 때
              var originalSrc = $(this).attr('src');
             if(originalSrc.includes('/resources/img/reserved_seat.png')){
@@ -395,33 +409,39 @@
                var result = false;
                result = confirm(seatNo+"번 좌석을 선택할까요?" );
                if(result){
-                  //alert("예매내역확인으로 이동");
-               var startTerminal = $('.seat-table').prev('.dis-info-elem').children('td').eq(2).text();
-               var endTerminal = $('.seat-table').prev('.dis-info-elem').children('td').eq(3).text();
-               var busNo = $('.seat-table').prev('.dis-info-elem').children('td').eq(0).text();
-               var departureTime = $('.seat-table').prev('.dis-info-elem').children('td').eq(1).text();
-               var seatNo = $(this).siblings('span').text();
-               
-               var regex = /\[(.*?)\](.*)/;
-               var matches = startTerminal.match(regex);
-               var startRegion = matches[1]; // "서울"과 같은 문자열을 얻습니다.
-               var startTerminal = matches[2]; // "서울고속버스터미널"과 같은 문자열을 얻습니다.
-               
-               var matches2 = endTerminal.match(regex);
-               var endRegion = matches2[1];
-               var endTerminal = matches2[2];
+				//alert("예매내역확인으로 이동");
+				var qqq = $('.seat-table');
+				var www = $('.seat-table').closest('.dis-info-elem');
+				var startTerminal = $('.seat-table').closest('.dis-info-elem').find('td').eq(2).text();
+				console.log(startTerminal);
+				console.log(qqq);
+				console.log(www);
+				var startTerminal = $('.seat-table').closest('.dis-info-elem').find('td').eq(2).text();
+				var endTerminal = $('.seat-table').parent().parent().prev('.dis-info-elem').children('td').eq(3).text();
+				var busNo = $('.seat-table').parent().parent().prev('.dis-info-elem').children('td').eq(0).text();
+				var departureTime = $('.seat-table').parent().parent().prev('.dis-info-elem').children('td').eq(1).text();
+				var seatNo = $(this).siblings('span').text();
+				
+				var regex = /\[(.*?)\](.*)/;
+				var matches = startTerminal.match(regex);
+				var startRegion = matches[1]; // "서울"과 같은 문자열을 얻습니다.
+				var startTerminal = matches[2]; // "서울고속버스터미널"과 같은 문자열을 얻습니다.
+				
+				var matches2 = endTerminal.match(regex);
+				var endRegion = matches2[1];
+				var endTerminal = matches2[2];
                   
-                  var busNo= busNo.match(/\d+/)[0];
-               var departureTime =  departureTime.match(/출발시간:(.*)/)[1].trim();
+              	var busNo= busNo.match(/\d+/)[0];
+				var departureTime =  departureTime.match(/출발시간:(.*)/)[1].trim();
 /*
-               //test
-               console.log(startRegion);
-               console.log(startTerminal);
-               console.log(endRegion);
-               console.log(endTerminal);
-               console.log(busNo);
-               console.log(seatNo);
-               console.log(departureTime);
+				//test
+				console.log(startRegion);
+				console.log(startTerminal);
+				console.log(endRegion);
+				console.log(endTerminal);
+				console.log(busNo);
+				console.log(seatNo);
+				console.log(departureTime);
 */
                var modalContent = "<p><strong>출발지:</strong>[" + startRegion + "]" + startTerminal + "</p>" +
                     "<p><strong>도착지:</strong>[" + endRegion + "]" + endTerminal + "</p>" +

@@ -4,7 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- container 끝 -->
-	<div id="footer">footer</div>
+	<!-- footer시작 -->
+	<div id="footer">
 	</div>
 	<!-- main_wrap끝 -->
 </body>
