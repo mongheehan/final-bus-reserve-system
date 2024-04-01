@@ -52,7 +52,15 @@
 					<li class="nav-item"><a class="nav-link" href="../reserve/reserve_list.do">조회/변경/취소</a></li>
 					<li id="myInfo" class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href='#' role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							로그인</a>
+								<!-- 로그인한 사용자 표시(인증x) -->
+								<sec:authorize access="isAnonymous()">
+									로그인
+								</sec:authorize>
+								<!-- 로그인한 사용자 표시(인증o) -->
+								<sec:authorize access="isAuthenticated()">
+									<p><sec:authentication property="principal.user.name"/>님</p>						
+								</sec:authorize>
+							</a>
 						<ul class="dropdown-menu">
 							<!-- 로그인 권한 설정(인증x) -->
 							<sec:authorize access="isAnonymous()">
