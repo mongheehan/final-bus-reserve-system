@@ -149,7 +149,6 @@
 	var choice_terminal;
 	document.getElementById('choice_terminal').addEventListener('click', function(){
 	 	choice_terminal = new bootstrap.Modal(document.getElementById('myModal'));
-	 	alert(choice_terminal);
 		choice_terminal.show();  //point1
 	})
 	//도착지 선택 클릭 이벤트
@@ -253,7 +252,6 @@
 	               $('#reserve_content2 #dispatchTbody').empty();
 	               $('#reserve_content2').append('<b>입력하신 정보에 대한 배차조회 결과입니다.</b>');
 	               $.each(dispatches, function(index, dispatch){
-	            	   alert("success안 each문 성공: " + dispatches);//test
 	            	   var newRow = $('<tr class = "dis-info-elem">');
 	            	   newRow.append('<td><b>' +'['+ dispatch.busType +']' +dispatch.busNo +'번'+  '</b></td>');
 	                   newRow.append('<td>' + dispatch.departureTime + '</td>');
@@ -405,21 +403,25 @@
             if(originalSrc.includes('/resources/img/reserved_seat.png')){
                return;
             }
-             var seatNo = $(this).closest('td').find('span').text();
-               var result = false;
-               result = confirm(seatNo+"번 좌석을 선택할까요?" );
-               if(result){
-				//alert("예매내역확인으로 이동");
-				var qqq = $('.seat-table');
-				var www = $('.seat-table').closest('.dis-info-elem');
-				var startTerminal = $('.seat-table').closest('.dis-info-elem').find('td').eq(2).text();
-				console.log(startTerminal);
-				console.log(qqq);
-				console.log(www);
-				var startTerminal = $('.seat-table').closest('.dis-info-elem').find('td').eq(2).text();
-				var endTerminal = $('.seat-table').parent().parent().prev('.dis-info-elem').children('td').eq(3).text();
-				var busNo = $('.seat-table').parent().parent().prev('.dis-info-elem').children('td').eq(0).text();
-				var departureTime = $('.seat-table').parent().parent().prev('.dis-info-elem').children('td').eq(1).text();
+			var startTerminal = $(this).closest('table .seat-table').closest('tr').prev().find('td').eq(2).text();
+			var endTerminal = $(this).closest('table .seat-table').closest('tr').prev().find('td').eq(3).text();
+			var busNo = $(this).closest('table .seat-table').closest('tr').prev().find('td').eq(0).text();
+			var departureTime = $(this).closest('table .seat-table').closest('tr').prev().find('td').eq(1).text();
+            var seatNo = $(this).closest('td').find('span').text();
+            var result = false;
+            
+            console.log(startTerminal);
+            console.log(endTerminal);
+            console.log(busNo);
+            console.log(departureTime);
+            console.log(seatNo);
+            
+            
+            
+            result = confirm(seatNo+"번 좌석을 선택할까요?" );
+            if(result){
+
+
 				var seatNo = $(this).siblings('span').text();
 				
 				var regex = /\[(.*?)\](.*)/;
@@ -430,9 +432,9 @@
 				var matches2 = endTerminal.match(regex);
 				var endRegion = matches2[1];
 				var endTerminal = matches2[2];
-                  
-              	var busNo= busNo.match(/\d+/)[0];
-				var departureTime =  departureTime.match(/출발시간:(.*)/)[1].trim();
+	                 
+             	var busNo= busNo.match(/\d+/)[0];
+				var departureTime =  departureTime.match(/(.*)/)[1].trim();
 /*
 				//test
 				console.log(startRegion);
@@ -443,7 +445,7 @@
 				console.log(seatNo);
 				console.log(departureTime);
 */
-               var modalContent = "<p><strong>출발지:</strong>[" + startRegion + "]" + startTerminal + "</p>" +
+               	var modalContent = "<p><strong>출발지:</strong>[" + startRegion + "]" + startTerminal + "</p>" +
                     "<p><strong>도착지:</strong>[" + endRegion + "]" + endTerminal + "</p>" +
                     "<p><strong>버스 번호:</strong> " + busNo + "</p>" +
                     "<p><strong>좌석:</strong> " + seatNo + " 번</p>" +
