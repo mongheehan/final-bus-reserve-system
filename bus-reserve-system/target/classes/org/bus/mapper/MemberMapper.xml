@@ -7,8 +7,8 @@
 	
 	<!-- 사용자 추가(회원가입) -->
 	<insert id="insertMember">
-		INSERT INTO User_info (id, password, name, birth, phone_no, email, type, user_bno) 
-		VALUES (#{id}, #{password}, #{name}, TO_DATE(#{birth}, 'YYYY-MM-DD HH24:MI:SS'), #{phoneNo}, #{email}, 'member', seq_user.nextval)
+		INSERT INTO User_info (id, password, name, birth, phone_no, email, type) 
+		VALUES (#{id}, #{password}, #{name}, TO_DATE(#{birth}, 'YYYY-MM-DD HH24:MI:SS'), #{phoneNo}, #{email}, 'member')
 	</insert>
 	
 	<!-- 사용자 상세 조회(로그인) -->

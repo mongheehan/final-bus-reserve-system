@@ -58,7 +58,7 @@
 								</sec:authorize>
 								<!-- 로그인한 사용자 표시(인증o) -->
 								<sec:authorize access="isAuthenticated()">
-									<p><sec:authentication property="principal.user.name"/>님</p>						
+									<sec:authentication property="principal.user.name"/>님					
 								</sec:authorize>
 							</a>
 						<ul class="dropdown-menu">
